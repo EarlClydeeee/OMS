@@ -21,28 +21,30 @@
                     <h1 class="login-title">Welcome Back</h1>
                     <p class="login-subtitle">Sign in to your account to continue</p>
 
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="form-input" 
-                            placeholder="Enter your email"
-                            required
-                        >
-                    </div>
+                    <form method="POST" action="../controllers/log_in.php">
+                        <div class="form-group">
+                            <label class="form-label" for="email">Username</label>
+                            <input 
+                                type="text" 
+                                name="username"
+                                id="username" 
+                                class="form-input" 
+                                placeholder="Enter your username"
+                                required
+                            >
+                        </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="password">Password</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="form-input" 
-                            placeholder="Enter your password"
-                            required
-                        >
-                    </div>
-
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-input" 
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+                    </form>
                     <div class="forgot-password">
                         <a href="#">Forgot your password?</a>
                     </div>
