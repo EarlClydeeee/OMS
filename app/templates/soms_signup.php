@@ -40,7 +40,7 @@
             
             <button type="submit" class="signup-btn">Create Account</button>
         </form>
-        <p class="login-link">Already have an account? <a href="wlogin.php">Log in here</a></p>
+        <p class="login-link">Already have an account? <a href="soms_login.php">Log in here</a></p>
     </div>
 
 </body>
