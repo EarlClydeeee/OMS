@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../../public/assets/css/accountsettings_tk_admin.css">
 </head>
 <body>
-<body>
     <section class="settings-section">
         <div class="container">
             <h2 class="section-title">Account Settings</h2>

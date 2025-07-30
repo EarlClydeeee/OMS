@@ -22,7 +22,7 @@
                                 <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
                                     Choose Files
                                 </button>
-                            </div>
+                            </div>0
                         </div>
                         
                         <div class="upload-progress" id="uploadProgress" style="display: none;">
