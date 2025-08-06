@@ -87,12 +87,11 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
             <button class="tab-btn" onclick="switchTab('applicators')">⚡ Applicators</button>
         </div>  
 
-        <!-- Section: Table Display for Machines -->
+        <!-- Machine Table -->
         <div>
             <h3>Latest Machines Added</h3>
 
-            <!-- Scrollable container for infinite scrolling -->
-            <div id="machines-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
+        <div id="machines-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
             <table class="entries-table">
                 <thead>
                     <tr>
@@ -115,7 +114,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
                     $machines = getMachines($pdo, 10, 0);
                     ?>
 
-                    <tbody id="machinesTanleBody">
+                    <tbody id="machinesTableBody">
                         <!-- Render fetched machine data as table rows -->
                         <?php foreach ($machines as $row): ?>
                             <tr>
@@ -155,8 +154,8 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
             </div>
         </div>
 
-            <!-- Scrollable container for infinite scrolling -->
-            <div id="applicator-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
+            <!-- Applicator Table -->
+        <div id="applicators-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
             <table class="entries-table">
                 <thead>
                     <tr>
@@ -218,7 +217,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
             </div>
         </div>
 
-        <!-- Add Machine Form -->
+        <!-- Add Machine Form Modal-->
     
         <form action="../controllers/add_machine.php" method="POST">
             <h2>Machine Information</h2>
@@ -255,6 +254,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
                         <span class="modal-icon">🔧</span>
                         Edit Machine
                     </h2>
+                    <button class="close-btn" onclick="closeModal()">✖️</button>
                 </div>
                 
                 <div class="modal-body">
@@ -354,6 +354,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
                         <span class="modal-icon">⚡</span>
                         Edit Applicator
                     </h2>
+                    <button class="close-btn" onclick="closeModal()">✖️</button>
                 </div>
                 
                 <div class="modal-body">
@@ -417,5 +418,6 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
                 </div>
             </div>
         </div>
-    </body>
+    <script> src = "../../public/assets/js/add_entry.js" </script>
+</body>
 </html>
