@@ -208,7 +208,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
                                 <!-- Delete form -->
                                 <form action="/SOMS/app/controllers/delete_applicator.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this applicator?');">
                                     <input type="hidden" name="applicator_id" value="<?= htmlspecialchars($row['applicator_id']) ?>">
-                                    <button type="submit">🗑️</button>
+                                    <button type="submit"class="action-btn delete-btn">🗑️</button>
                                 </form>
                                 </td>
                             </tr>
