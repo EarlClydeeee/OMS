@@ -87,37 +87,6 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
             <button class="tab-btn" onclick="switchTab('applicators')">⚡ Applicators</button>
         </div>  
 
-        <!-- Add Machine Form -->
-        <form action="../controllers/add_machine.php" method="POST">
-            <h2>Machine Information</h2>
-            <label for="machine_ctrl_no">Control No:</label>
-            <input type="text" id="machine_ctrl_no" name="control_no" required><br><br>
-
-            <label for="description">Description:</label>
-            <select id="description" name="description" required>
-                <option value="">--Select--</option>
-                <option value="AUTOMATIC">AUTOMATIC</option>
-                <option value="SEMI-AUTOMATIC">SEMI-AUTOMATIC</option>
-            </select><br><br>
-
-            <label for="model">Model:</label>
-            <input type="text" id="model" name="model" required><br><br>
-
-            <label for="machine_maker">Machine Maker:</label>
-            <input type="text" id="machine_maker" name="machine_maker" required><br><br>
-
-            <label for="machine_serial_no">Serial No:</label>
-            <input type="text" id="machine_serial_no" name="serial_no"><br><br>
-
-            <label for="machine_invoice_no">Invoice No:</label>
-            <input type="text" id="machine_invoice_no" name="invoice_no"><br><br>
-
-            <button type="submit">Submit Machine</button>
-        </form>
-
-        <hr>
-
-
         <!-- Section: Table Display for Machines -->
         <div>
             <h3>Latest Machines Added</h3>
@@ -186,7 +155,97 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
             </div>
         </div>
 
-        <hr>
+            <!-- Scrollable container for infinite scrolling -->
+            <div id="applicator-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
+            <table class="entries-table">
+                <thead>
+                    <tr>
+                        <th>HP No</th>
+                        <th>Terminal No</th>
+                        <th>Description</th>
+                        <th>Wire Type</th>
+                        <th>Terminal Maker</th>
+                        <th>Applicator Maker</th>
+                        <th>Serial No</th>
+                        <th>Invoice No</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                    <tbody id="applicator-body">
+                        <?php
+                            require_once __DIR__ . '/../includes/db.php';
+                            require_once __DIR__ . '/../models/read_applicators.php';
+                            $applicators = getApplicators($pdo, 10, 0);
+                            foreach ($applicators as $row):
+                        ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['hp_no']) ?></td>
+                                <td><?= htmlspecialchars($row['terminal_no']) ?></td>
+                                <td><?= htmlspecialchars($row['description']) ?></td>
+                                <td><?= htmlspecialchars($row['wire']) ?></td>
+                                <td><?= htmlspecialchars($row['terminal_maker']) ?></td>
+                                <td><?= htmlspecialchars($row['applicator_maker']) ?></td>
+                                <td><?= htmlspecialchars($row['serial_no']) ?></td>
+                                <td><?= htmlspecialchars($row['invoice_no']) ?></td>
+                                <td>
+                                <!-- Edit link with data attributes -->
+                                <div class="actions">
+                                    <button class="action-btn edit-btn"
+                                        type="button" 
+                                        onclick="openApplicatorEditModal(this)" 
+                                        data-id="<?= $row['applicator_id'] ?>"
+                                        data-control="<?= htmlspecialchars($row['hp_no']) ?>"
+                                        data-terminal="<?= htmlspecialchars($row['terminal_no']) ?>"
+                                        data-description="<?= htmlspecialchars($row['description']) ?>"
+                                        data-wire="<?= htmlspecialchars($row['wire']) ?>"
+                                        data-terminal-maker="<?= htmlspecialchars($row['terminal_maker']) ?>"
+                                        data-applicator-maker="<?= htmlspecialchars($row['applicator_maker']) ?>"
+                                        data-serial="<?= htmlspecialchars($row['serial_no']) ?>"
+                                        data-invoice="<?= htmlspecialchars($row['invoice_no']) ?>"
+                                >✏️</button>
+
+                                <!-- Delete form -->
+                                <form action="/SOMS/app/controllers/delete_applicator.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this applicator?');">
+                                    <input type="hidden" name="applicator_id" value="<?= htmlspecialchars($row['applicator_id']) ?>">
+                                    <button type="submit">🗑️</button>
+                                </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add Machine Form -->
+    
+        <form action="../controllers/add_machine.php" method="POST">
+            <h2>Machine Information</h2>
+            <label for="machine_ctrl_no">Control No:</label>
+            <input type="text" id="machine_ctrl_no" name="control_no" required><br><br>
+
+            <label for="description">Description:</label>
+            <select id="description" name="description" required>
+                <option value="">--Select--</option>
+                <option value="AUTOMATIC">AUTOMATIC</option>
+                <option value="SEMI-AUTOMATIC">SEMI-AUTOMATIC</option>
+            </select><br><br>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required><br><br>
+
+            <label for="machine_maker">Machine Maker:</label>
+            <input type="text" id="machine_maker" name="machine_maker" required><br><br>
+
+            <label for="machine_serial_no">Serial No:</label>
+            <input type="text" id="machine_serial_no" name="serial_no"><br><br>
+
+            <label for="machine_invoice_no">Invoice No:</label>
+            <input type="text" id="machine_invoice_no" name="invoice_no"><br><br>
+
+            <button type="submit">Submit Machine</button>
+        </form>
 
         <!-- Edit Machine Modal -->
         <div id="editModal" class="modal-overlay">
@@ -285,69 +344,7 @@ include_once __DIR__ . '/../includes/header.php'; // Include the header file for
         </form>
 
 
-        <!-- Section: Table Display for Applicators -->
-        <div>
-            <h3>Latest Applicators Added</h3>
-
-            <!-- Scrollable container for infinite scrolling -->
-            <div id="applicator-table" class="entries-table-card active" style="height: 300px; overflow-y: auto;">
-            <table class="entries-table">
-                <thead>
-                    <tr>
-                        <th>HP No</th>
-                        <th>Terminal No</th>
-                        <th>Description</th>
-                        <th>Wire Type</th>
-                        <th>Terminal Maker</th>
-                        <th>Applicator Maker</th>
-                        <th>Serial No</th>
-                        <th>Invoice No</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                    <tbody id="applicator-body">
-                        <?php
-                            require_once __DIR__ . '/../includes/db.php';
-                            require_once __DIR__ . '/../models/read_applicators.php';
-                            $applicators = getApplicators($pdo, 10, 0);
-                            foreach ($applicators as $row):
-                        ?>
-                            <tr>
-                                <td><?= htmlspecialchars($row['hp_no']) ?></td>
-                                <td><?= htmlspecialchars($row['terminal_no']) ?></td>
-                                <td><?= htmlspecialchars($row['description']) ?></td>
-                                <td><?= htmlspecialchars($row['wire']) ?></td>
-                                <td><?= htmlspecialchars($row['terminal_maker']) ?></td>
-                                <td><?= htmlspecialchars($row['applicator_maker']) ?></td>
-                                <td><?= htmlspecialchars($row['serial_no']) ?></td>
-                                <td><?= htmlspecialchars($row['invoice_no']) ?></td>
-                                <td>
-                                <!-- Edit link with data attributes -->
-                                <a href="#" onclick="openApplicatorEditModal(this)" 
-                                    data-id="<?= $row['applicator_id'] ?>"
-                                    data-control="<?= htmlspecialchars($row['hp_no']) ?>"
-                                    data-terminal="<?= htmlspecialchars($row['terminal_no']) ?>"
-                                    data-description="<?= htmlspecialchars($row['description']) ?>"
-                                    data-wire="<?= htmlspecialchars($row['wire']) ?>"
-                                    data-terminal-maker="<?= htmlspecialchars($row['terminal_maker']) ?>"
-                                    data-applicator-maker="<?= htmlspecialchars($row['applicator_maker']) ?>"
-                                    data-serial="<?= htmlspecialchars($row['serial_no']) ?>"
-                                    data-invoice="<?= htmlspecialchars($row['invoice_no']) ?>"
-                                >✏️</a>
-
-                                <!-- Delete form -->
-                                <form action="/SOMS/app/controllers/delete_applicator.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this applicator?');">
-                                    <input type="hidden" name="applicator_id" value="<?= htmlspecialchars($row['applicator_id']) ?>">
-                                    <button type="submit">🗑️</button>
-                                </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        
 
         <!-- Edit Applicator Modal -->
         <div id="editApplicatorModal" class="modal-overlay">
