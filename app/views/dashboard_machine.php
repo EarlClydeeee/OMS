@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../public/assets/css/dashboard_machine.css">
 </head>
 <body>
-    <?php include '../includes/side_bar.php'; ?>
+    <?php //include '../includes/side_bar.php'; ?>
     <div class="admin-container">
         <!-- Main Content -->
         <div class="main-content">

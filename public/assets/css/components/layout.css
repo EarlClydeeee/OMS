@@ -1,0 +1,14 @@
+/* App wrapper */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+    padding: 60px;
+    max-width: 100%;
+    margin: 0 auto;
+    animation: fadeIn 0.6s ease-out;
+
+}
