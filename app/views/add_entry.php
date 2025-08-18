@@ -27,6 +27,7 @@ if (!isset($_SESSION['user_id'])) {
     <title>Add Machine or Applicator</title>4
     <link rel="stylesheet" href="../../public/assets/css/base/base.css">
     <link rel="stylesheet" href="../../public/assets/css/add_entry.css">
+    <link rel="stylesheet" href="../../public/assets/css/components/modal_forms.css">
     <!-- Load machine infinite scroll logic -->
     <script src="../../public/assets/js/load_machines.js" defer></script>
     <!-- Load applicator infinite scroll logic -->
