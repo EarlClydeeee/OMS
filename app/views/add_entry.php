@@ -127,7 +127,7 @@ if (!isset($_SESSION['user_id'])) {
 
                                             <!-- Edit link with data attributes -->
                                                 <div class="actions">
-                                                    <button class="action-btn edit-btn"
+                                                    <button class="edit-btn"
                                                         type="button"
                                                         onclick="openEditModal(this)"
                                                         data-id="<?= $row['machine_id'] ?>"
