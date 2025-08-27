@@ -24,8 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Machine or Applicator</title>4
-    <link rel="stylesheet" href="../../public/assets/css/base/base.css">
+    <title>Add Machine or Applicator</title>
     <link rel="stylesheet" href="../../public/assets/css/add_entry.css">
     <link rel="stylesheet" href="/SOMS/public/assets/css/components/modal.css">
     <link rel="stylesheet" href="/SOMS/public/assets/css/components/header.css">
@@ -78,12 +77,6 @@ if (!isset($_SESSION['user_id'])) {
                             <option value="SEMI-AUTOMATIC">Semi-Automatic</option>
                             <option value="SIDE">Side</option>
                             <option value="END">End</option>
-                        </select>
-
-                        <select id="statusFilter" class="filter-select">
-                            <option value="all">All Status</option>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
                         </select>
 
                         <button type="button" class="btn-secondary" onclick="exportData()">📥 Export</button>
