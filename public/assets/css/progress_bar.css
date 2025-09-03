@@ -1,0 +1,337 @@
+/**
+ * Progress Bar Styles for Applicator Outputs
+ * 
+ * CSS styles for the progress bar system that displays part lifespan progress
+ * with color-coded indicators based on percentage values.
+ */
+
+/* Progress Container */
+.progress-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* Progress Item */
+.progress-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.progress-item:hover {
+    background: #f1f3f4;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress Label */
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.part-name {
+    color: #495057;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+
+.percentage {
+    color: #6c757d;
+    font-size: 0.9em;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Progress Bar Container */
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.6s ease, background-color 0.3s ease;
+    position: relative;
+    min-width: 0;
+}
+
+/* Progress Bar Colors */
+.progress-success {
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.progress-info {
+    background: linear-gradient(90deg, #17a2b8, #6f42c1);
+}
+
+.progress-warning {
+    background: linear-gradient(90deg, #ffc107, #fd7e14);
+}
+
+.progress-danger {
+    background: linear-gradient(90deg, #dc3545, #e83e8c);
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+    animation: progressFill 1s ease-out;
+}
+
+@keyframes progressFill {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--target-width);
+    }
+}
+
+/* Progress Bar Glow Effect */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Progress Bar Stripes */
+.progress-bar.progress-danger {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 1rem 1rem;
+    animation: progressFill 1s ease-out, progressStripes 1s linear infinite;
+}
+
+@keyframes progressStripes {
+    0% {
+        background-position: 1rem 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .progress-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .progress-container h3 {
+        font-size: 1.2em;
+    }
+    
+    .progress-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .percentage {
+        text-align: left;
+    }
+    
+    .progress-bar-container {
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-container {
+        margin: 5px;
+        padding: 10px;
+    }
+    
+    .progress-item {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .progress-bar-container {
+        height: 8px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .progress-container {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .progress-container h3 {
+        color: #e2e8f0;
+        border-bottom-color: #4a5568;
+    }
+    
+    .progress-item {
+        background: #4a5568;
+        border-color: #718096;
+    }
+    
+    .progress-item:hover {
+        background: #2d3748;
+    }
+    
+    .part-name {
+        color: #e2e8f0;
+    }
+    
+    .percentage {
+        color: #a0aec0;
+    }
+    
+    .progress-bar-container {
+        background: #718096;
+    }
+}
+
+/* Loading State */
+.progress-container.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.progress-container.loading::after {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Error State */
+.error {
+    color: #dc3545;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Success State */
+.success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Tooltip for Progress Bars */
+.progress-item {
+    position: relative;
+}
+
+.progress-item:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0.9;
+}
+
+.progress-item:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    z-index: 1000;
+}
+
+/* Accessibility */
+.progress-bar:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .progress-bar {
+        border: 1px solid #000;
+    }
+    
+    .progress-success {
+        background: #006400;
+    }
+    
+    .progress-info {
+        background: #000080;
+    }
+    
+    .progress-warning {
+        background: #808000;
+    }
+    
+    .progress-danger {
+        background: #800000;
+    }
+}
