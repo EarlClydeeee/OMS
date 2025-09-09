@@ -1,0 +1,194 @@
+/* ========================================
+   THEME TOGGLE COMPONENT
+   ======================================== */
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--background-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  background: var(--background-secondary);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle.active {
+  background: var(--gradient-primary);
+  color: var(--text-inverse);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle.active:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.theme-icon {
+  font-size: 16px;
+  transition: transform var(--transition-bounce);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: scale(1.1);
+}
+
+.theme-toggle.active .theme-icon {
+  transform: rotate(180deg) scale(1.1);
+}
+
+.theme-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle.active .theme-label {
+  color: var(--text-inverse);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Ripple effect */
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  pointer-events: none;
+}
+
+.theme-toggle:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* Dark mode specific styles */
+[data-theme="dark"] .theme-toggle {
+  background: var(--background-card);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: var(--background-secondary);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-xl);
+}
+
+[data-theme="dark"] .theme-toggle.active {
+  background: var(--gradient-primary);
+  box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+}
+
+/* Header positioning */
+.header .theme-toggle {
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+/* Sidebar positioning */
+.sidebar .theme-toggle {
+  margin: 16px;
+  width: calc(100% - 32px);
+  justify-content: center;
+}
+
+/* Fixed positioning fallback */
+.theme-toggle[style*="position: fixed"] {
+  background: var(--background-card);
+  border: 2px solid var(--primary-color);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle[style*="position: fixed"]:hover {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .theme-toggle {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .theme-icon {
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .theme-label {
+    font-size: 11px;
+  }
+  
+  .sidebar .theme-toggle {
+    margin: 12px;
+    width: calc(100% - 24px);
+  }
+}
+
+/* Animation for theme transition */
+.theme-transitioning * {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+/* Accessibility */
+.theme-toggle:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.theme-toggle:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-toggle {
+    border-width: 2px;
+  }
+  
+  .theme-toggle.active {
+    border-color: var(--text-inverse);
+  }
+}

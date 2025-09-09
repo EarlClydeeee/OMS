@@ -1,0 +1,137 @@
+/* ========================================
+   THEME SYSTEM - CSS CUSTOM PROPERTIES
+   ======================================== */
+
+:root {
+  /* Light Theme (Default) */
+  --primary-color: #DC143C;
+  --primary-hover: #B22222;
+  --primary-light: #FF6B6B;
+  --primary-dark: #8B0000;
+  
+  --secondary-color: #2F80ED;
+  --secondary-hover: #1E6BB8;
+  --secondary-light: #6BB6FF;
+  --secondary-dark: #1A5490;
+  
+  --success-color: #22C55E;
+  --success-hover: #16A34A;
+  --warning-color: #EAB308;
+  --warning-hover: #CA8A04;
+  --error-color: #EF4444;
+  --error-hover: #DC2626;
+  
+  --background-primary: #FFFFFF;
+  --background-secondary: #F9FAFB;
+  --background-tertiary: #F3F4F6;
+  --background-card: #FFFFFF;
+  --background-overlay: rgba(0, 0, 0, 0.5);
+  
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-inverse: #FFFFFF;
+  --text-muted: #D1D5DB;
+  
+  --border-primary: #E5E7EB;
+  --border-secondary: #D1D5DB;
+  --border-focus: var(--primary-color);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+  --gradient-background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-tertiary) 100%);
+  --gradient-card: linear-gradient(135deg, var(--background-card) 0%, #FEF2F2 50%, #FECACA 100%);
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-bounce: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #FF6B6B;
+  --primary-hover: #FF5252;
+  --primary-light: #FF8A80;
+  --primary-dark: #E53935;
+  
+  --secondary-color: #64B5F6;
+  --secondary-hover: #42A5F5;
+  --secondary-light: #90CAF9;
+  --secondary-dark: #1976D2;
+  
+  --success-color: #4CAF50;
+  --success-hover: #45A049;
+  --warning-color: #FFC107;
+  --warning-hover: #FFB300;
+  --error-color: #F44336;
+  --error-hover: #E53935;
+  
+  --background-primary: #0A0A0A;
+  --background-secondary: #1A1A1A;
+  --background-tertiary: #2D1B1B;
+  --background-card: rgba(0, 0, 0, 0.85);
+  --background-overlay: rgba(0, 0, 0, 0.8);
+  
+  --text-primary: #FFFFFF;
+  --text-secondary: #E5E7EB;
+  --text-tertiary: #9CA3AF;
+  --text-inverse: #111827;
+  --text-muted: #4B5563;
+  
+  --border-primary: #374151;
+  --border-secondary: #4B5563;
+  --border-focus: var(--primary-color);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  
+  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+  --gradient-background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 50%, var(--background-tertiary) 100%);
+  --gradient-card: linear-gradient(135deg, var(--background-card) 0%, rgba(220, 20, 60, 0.1) 50%, rgba(139, 0, 0, 0.1) 100%);
+}
+
+/* Theme Transition */
+* {
+  transition: background-color var(--transition-normal),
+              color var(--transition-normal),
+              border-color var(--transition-normal),
+              box-shadow var(--transition-normal);
+}
+
+/* Dark mode specific animations */
+[data-theme="dark"] body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 70%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-20px, -20px) rotate(120deg); }
+  66% { transform: translate(20px, -10px) rotate(240deg); }
+}
